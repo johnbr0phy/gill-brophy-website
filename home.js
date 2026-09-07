@@ -103,7 +103,9 @@ function resize(){
  dpr=Math.min(devicePixelRatio,1.4);const scale=Math.min(1,1700/(innerWidth*dpr));
  width=Math.round(innerWidth*dpr*scale);height=Math.round(viewportHeight*dpr*scale);
  canvas.width=mask.width=layer.width=width;canvas.height=mask.height=layer.height=height;
- prepared.clear();target=scrollY/viewportHeight;position=target;wake();
+ prepared.clear();target=scrollY/viewportHeight;position=target;
+ // Resizing clears the canvas: repaint in the same task, before the browser presents it.
+ cancelAnimationFrame(raf);raf=0;render();
 }
 preference.addEventListener('change',()=>{gentle=preference.matches;wake()});
 addEventListener('scroll',readScroll,{passive:true});addEventListener('resize',resize,{passive:true});
@@ -118,7 +120,6 @@ async function start(){
   const loaded=await Promise.all(selected.map(async work=>{
    const image=new Image();image.decoding='async';image.src=work.width*work.height>4_000_000?work.thumbnail:work.image;
    try{await image.decode()}catch{image.src=work.thumbnail;try{await image.decode()}catch{return null}}
-   if(work.id===selected[0].id)document.querySelector('.paint-backdrop').style.backgroundImage='url('+JSON.stringify(image.src)+')';
    return {work,image};
   }));
   const available=loaded.filter(Boolean);
