@@ -55,3 +55,12 @@
 .gallery-page .portfolio-header nav,.about-page .portfolio-header nav{padding:10px 0}
 .gallery-page .portfolio-header nav::before,.about-page .portfolio-header nav::before{display:none}
 @media(max-width:600px){.portfolio-header{padding:18px 22px;gap:10px}.portfolio-header nav{gap:21px;padding:5px 14px;font-size:16px}.portfolio-wordmark{font-size:23px}.gallery-page .portfolio-header nav,.about-page .portfolio-header nav{padding:5px 0}}
+
+/* Exact photographic signature from Hellebores, cropped by the SVG viewport.
+   Browser colour adjustment lifts the paper and darkens the original ink;
+   none of the handwriting is redrawn or generated. */
+.portfolio-wordmark{display:block;flex:none;width:164px;height:80px;background:#fff;border-radius:2% 3% 2% 4% / 10% 7% 12% 8%;text-shadow:none;overflow:hidden}
+.artist-signature{display:block;width:100%;height:100%;filter:grayscale(1) contrast(2.5);overflow:hidden}
+@media(max-width:600px){.portfolio-wordmark{width:124px;height:61px}}
+.paint-home .portfolio-wordmark{background:#faf4e7}
+.paint-home .artist-signature{mix-blend-mode:multiply}
