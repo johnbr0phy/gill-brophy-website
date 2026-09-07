@@ -50,7 +50,7 @@ const focalPoints={
  "fa14d50c6c43f8cd9681e482":[0.5, 0.42], // The Allotment - II
  "7a8e026bd363b8c6cce10c92":[0.5, 0.39], // Flora —  Neon Bouquet
  "985374864b32aaf1fdfd2a2d":[0.54, 0.68], // Willum
- "07920ab84e6915a83134d878":[0.56, 0.52], // Willum in the Wild Flowers
+ "07920ab84e6915a83134d878":[0.56, 0.34], // Willum in the Wild Flowers — keep both ears above the desktop crop
  "75468b16b2766554f4ae0637":[0.5, 0.44], // Rudbekia Dancers
  "de1a45ae578cfc58f007df0e":[0.5, 0.45], // Views Through I
  "9c26bee26cfeb0c3fd28fbb1":[0.5, 0.44], // Views Through II
