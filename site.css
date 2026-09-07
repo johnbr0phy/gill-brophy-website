@@ -42,3 +42,6 @@
 .gallery-page .viewer-art{height:calc(100dvh - 245px)}
 @media(max-width:700px){.gallery-page .gallery-intro{padding:30px 22px;display:block}.gallery-page .gallery-intro p{margin-top:16px}.collections-section{padding:0 22px;margin-bottom:35px}.collection-previews{gap:18px}.collection-tile{flex-basis:146px}.collection-tile img{width:146px;height:112px}.results-heading{padding:0 22px}.results-heading h2{font-size:27px}.gallery-page .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:38px 22px}.gallery-page .work-card img{height:220px}.gallery-page .work-card h2{font-size:16px}.gallery-page .work-card .work-caption{padding-top:12px}}
 @media(max-width:390px){.gallery-page .work-card img{height:180px}}
+/* Plain navigation on light pages; the artwork homepage keeps its contrast treatment. */
+.gallery-page .portfolio-header nav,.about-page .portfolio-header nav{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-radius:0;padding:11px 0}
+.gallery-page .portfolio-header nav a,.about-page .portfolio-header nav a{color:#29433b}
