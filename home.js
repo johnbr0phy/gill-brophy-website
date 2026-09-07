@@ -95,6 +95,7 @@ function render(){
   if(active!==index){active=index;title.textContent=displayTitle(paintings[index]);title.href='/gill-brophy-website/gallery.html#'+paintings[index].id}
  }
  cue.style.opacity=String(1-smooth(position/.55));
+ cue.classList.toggle('is-dismissed',position>=.55);
  const ending=position>paintings.length*SPAN-.25;title.style.opacity=ending?'0':'1';title.style.pointerEvents=ending?'none':'auto';title.tabIndex=ending?-1:0;
  updateContrast(Math.abs(target-position)<=.0006);
  if(Math.abs(target-position)>.0006)wake();

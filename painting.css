@@ -58,3 +58,12 @@ html.paint-document{background:#181817;overscroll-behavior-y:none}
 .paint-home .paint-cue:hover span{transform:none}
 @media(max-width:600px){.paint-home .painting-title::after{left:-25px;right:-19px}.paint-home .paint-cue::after{left:-18px;right:-26px}}
 .paint-home .portfolio-header nav::before,.paint-home .painting-title::before,.paint-home .paint-cue::before{mask-mode:luminance}
+/* A small breathing ink arrow replaces the labelled scroll control. */
+.paint-home .paint-cue{width:44px;height:58px;padding:3px 10px;display:grid;place-items:center;top:calc(100svh - 88px);color:var(--control-paint)!important;filter:drop-shadow(0 1px 2px #ffffff80)}
+.paint-home[data-control-tone="light"] .paint-cue{filter:drop-shadow(0 1px 2px #0009)}
+.paint-home .paint-cue::before,.paint-home .paint-cue::after{display:none}
+.scroll-hint{width:24px;height:52px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;animation:scroll-invitation 2.8s ease-in-out infinite}
+@keyframes scroll-invitation{0%,100%{transform:translateY(-3px);opacity:.55}50%{transform:translateY(5px);opacity:1}}
+.paint-home .paint-cue:hover .scroll-hint,.paint-home .paint-cue:focus-visible .scroll-hint{opacity:1}
+@media(prefers-reduced-motion:reduce){.scroll-hint{animation:none;opacity:1}}
+.paint-home .paint-cue.is-dismissed{display:none}
