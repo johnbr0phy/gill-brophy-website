@@ -1,3 +1,4 @@
+import {watchArtContrast} from './art-contrast.js';
 import {displayTitle} from './curation.js';
 import {focalPointFor,coverPlacement} from './focal-points.js';
 import {buildStrokes} from './paint-strokes.js';
@@ -7,6 +8,7 @@ let paintings=[];
 const STORAGE_KEY='gill-painting-selection-v1';
 const canvas=document.querySelector('#painting'),ctx=canvas.getContext('2d',{alpha:false});
 const title=document.querySelector('#painting-title'),cue=document.querySelector('.paint-cue');
+const updateContrast=watchArtContrast(canvas);
 const preference=matchMedia('(prefers-reduced-motion: reduce)');
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const smooth=v=>{v=clamp(v);return v*v*(3-2*v)};
@@ -94,6 +96,7 @@ function render(){
  }
  cue.style.opacity=String(1-smooth(position/.55));
  const ending=position>paintings.length*SPAN-.25;title.style.opacity=ending?'0':'1';title.style.pointerEvents=ending?'none':'auto';title.tabIndex=ending?-1:0;
+ updateContrast(Math.abs(target-position)<=.0006);
  if(Math.abs(target-position)>.0006)wake();
 }
 function wake(){if(!raf&&!document.hidden)raf=requestAnimationFrame(render)}
@@ -149,4 +152,5 @@ function showEmpty(message){
  document.querySelector('#paint-journey').style.height='45svh';cue.hidden=true;title.hidden=true;
  document.querySelector('.paint-end h2').textContent=message;document.querySelector('.paint-backdrop').style.backgroundImage='none';
 }
+document.fonts.ready.then(()=>updateContrast(true));
 resize();start();
