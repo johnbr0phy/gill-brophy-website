@@ -1,3 +1,4 @@
+import {focalPointFor,coverPlacement} from './focal-points.js';
 import {buildStrokes} from './paint-strokes.js';
 import {selectGalleryWorks,scoreForWork} from './gallery-sequence.js';
 import {analyseSurface,chooseBrush,buildRevealMarks,createBrushTips,drawReveal} from './reveal-brushes.js';
@@ -25,26 +26,8 @@ function prepare(index){
  if(prepared.has(index))return prepared.get(index);
  const image=images[index];if(!image?.complete||!image.naturalWidth)return null;
  const data=paintings[index],source=surface(),c=source.getContext('2d');
- const cover=Math.max(width/image.naturalWidth,height/image.naturalHeight);
- const desktop=innerWidth>=768&&width/height>1.15;
- // Wide screens show the composition at almost its full height, rather than
- // enlarging portrait paintings to fill the entire screen width.
- const scale=desktop?Math.min(width/image.naturalWidth,height/image.naturalHeight)*1.02:cover;
- const sw=image.naturalWidth*scale,sh=image.naturalHeight*scale;
- const focus=data.focus||[.5,.5],x=-(sw-width)*focus[0],y=-(sh-height)*focus[1];
- if(desktop&&(sw<width||sh<height)){
-  // Extend the painting’s own colours into the surrounding space.
-  const bw=image.naturalWidth*cover*1.08,bh=image.naturalHeight*cover*1.08;
-  c.filter=`blur(${Math.max(16,width*.018)}px)`;
-  c.drawImage(image,(width-bw)/2,(height-bh)/2,bw,bh);c.filter='none';
-  const detail=surface(),dc=detail.getContext('2d');dc.drawImage(image,x,y,sw,sh);
-  dc.globalCompositeOperation='destination-in';
-  const horizontal=sw<width,edge=Math.min(.09,32/(horizontal?sw:sh));
-  const fade=horizontal?dc.createLinearGradient(x,0,x+sw,0):dc.createLinearGradient(0,y,0,y+sh);
-  fade.addColorStop(0,'transparent');fade.addColorStop(edge,'#fff');
-  fade.addColorStop(1-edge,'#fff');fade.addColorStop(1,'transparent');
-  dc.fillStyle=fade;dc.fillRect(0,0,width,height);c.drawImage(detail,0,0);
- }else c.drawImage(image,x,y,sw,sh);
+ const {x,y,sw,sh}=coverPlacement(image.naturalWidth,image.naturalHeight,width,height,data.focus);
+ c.drawImage(image,x,y,sw,sh);
  // A low-frequency colour study underlies the sharp pigment. It is built once, not filtered each frame.
  const wash=surface(),wc=wash.getContext('2d'),study=document.createElement('canvas');study.width=70;study.height=70;
  study.getContext('2d').drawImage(source,0,0,70,70);wc.filter=`blur(${Math.max(7,width*.014)}px) saturate(1.12)`;
@@ -144,7 +127,7 @@ async function start(){
   const usedBrushes=[],studyCanvas=document.createElement('canvas');studyCanvas.width=studyCanvas.height=64;
   const studyContext=studyCanvas.getContext('2d',{willReadFrequently:true});
   for(const {work,image} of available){
-   const score=scoreForWork(work);paintings.push({...work,key:score,src:work.image,focus:[.5,.5]});images.push(image);
+   const score=scoreForWork(work);paintings.push({...work,key:score,src:work.image,focus:focalPointFor(work)});images.push(image);
    studyContext.clearRect(0,0,64,64);studyContext.drawImage(image,0,0,64,64);
    let study={};try{study=analyseSurface(studyContext.getImageData(0,0,64,64))}catch{}
    const style=chooseBrush(work,study,usedBrushes,priorBrushes[work.id]);
