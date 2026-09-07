@@ -51,3 +51,8 @@ body.index-open{overflow:hidden}
 .portfolio-header .desktop-navigation a:hover,.portfolio-header .desktop-navigation a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:7px}
 .portfolio-header .portfolio-menu-button{display:none}
 @media(max-width:700px){.desktop-navigation{display:none}.portfolio-header .portfolio-menu-button{display:flex}}
+/* A smaller masthead gives more of the viewport back to the paintings. */
+.portfolio-header,.gallery-page .portfolio-header,.about-page .portfolio-header{min-height:78px;padding:9px 4.3%}
+.portfolio-header .portfolio-wordmark{width:123px;height:60px}
+.gallery-page{padding-top:78px}
+@media(max-width:600px){.portfolio-header,.gallery-page .portfolio-header,.about-page .portfolio-header{min-height:60px;padding:8px 22px}.portfolio-header .portfolio-wordmark{width:81px;height:40px}.gallery-page{padding-top:94px}}
