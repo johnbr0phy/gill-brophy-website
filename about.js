@@ -8,7 +8,7 @@ try{
   const work=works.find(w=>pattern.test(w.original_name))||works.find(w=>!used.has(w.id));
   if(!work)continue;used.add(work.id);
   const image=document.querySelector(`[data-art="${slot}"]`);
-  image.alt=slot==='pots'?displayTitle(work):`Detail of ${displayTitle(work)}, a painting by Gill Brophy`;
+  image.alt=`${displayTitle(work)}, a painting by Gill Brophy`;
   image.addEventListener('load',()=>{image.hidden=false},{once:true});
   image.loading='eager';
   image.src=work.image;
