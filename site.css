@@ -89,3 +89,9 @@
 @media(max-width:600px){.portfolio-header nav{gap:20px;padding:5px 0 5px 10px}.portfolio-header nav::before,.gallery-page .portfolio-header nav::before,.about-page .portfolio-header nav::before{right:-22px;left:-12px;top:-4px;bottom:-8px}.gallery-page .portfolio-header nav,.about-page .portfolio-header nav{padding:5px 0 5px 10px}}
 @media(prefers-reduced-motion:reduce){.portfolio-header nav::before{animation:none!important}}
 .gallery-page,.about-page{overflow-x:clip}
+/* Brush-filled forms with an independent, slightly displaced ink outline. */
+.portfolio-header nav{--field:#29433b;--field-ink:#fff}
+.portfolio-header nav::before,.gallery-page .portfolio-header nav::before,.about-page .portfolio-header nav::before{clip-path:none;animation:none;transition:none;mask:url('./images/control-paint.svg') center/100% 100% no-repeat;-webkit-mask:url('./images/control-paint.svg') center/100% 100% no-repeat}
+.portfolio-header nav::after{content:"";position:absolute;pointer-events:none;z-index:-1;left:-28px;right:calc(-4.3vw - 6px);top:-3px;bottom:-15px;background:var(--field);mask:url('./images/control-line.svg') center/100% 100% no-repeat;-webkit-mask:url('./images/control-line.svg') center/100% 100% no-repeat}
+@media(max-width:600px){.portfolio-header nav::after{left:-18px;right:-28px;top:0;bottom:-12px}}
+.portfolio-header nav::before{mask-mode:luminance}

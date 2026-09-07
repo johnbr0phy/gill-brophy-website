@@ -46,3 +46,15 @@ html.paint-document{background:#181817;overscroll-behavior-y:none}
 @media(max-width:600px){.paint-home .portfolio-header nav{padding-left:10px}.paint-home .painting-title::before{left:-20px;right:-14px}.paint-home .paint-cue::before{right:-20px;left:-12px}.paint-home .painting-title{max-width:52vw;padding-top:10px;padding-bottom:10px}.paint-home .paint-cue{padding:10px 0 10px 10px}}
 @media(prefers-reduced-motion:reduce){.paint-home .painting-title::before,.paint-home .paint-cue::before,.paint-home .portfolio-header nav::before{animation:none;transition:none}}
 @media(max-width:600px){.paint-home .painting-title{max-width:44vw}}
+/* Pick the signature's initial ink once, then keep the controls steady. */
+.paint-home{--control-paint:#18211b;--control-text:#fffaf0}
+.paint-home[data-control-tone="light"]{--control-paint:#fffaf0;--control-text:#18211b}
+.paint-home .portfolio-header nav,.paint-home .painting-title,.paint-home .paint-cue{--field:var(--control-paint);--field-ink:var(--control-text)}
+.paint-home .portfolio-header nav::before,.paint-home .painting-title::before,.paint-home .paint-cue::before{animation:none;transition:none;clip-path:none;mask:url('./images/control-paint.svg') center/100% 100% no-repeat;-webkit-mask:url('./images/control-paint.svg') center/100% 100% no-repeat}
+.paint-home .painting-title::before{transform:scaleX(-1)}
+.paint-home .painting-title::after,.paint-home .paint-cue::after{content:"";position:absolute;pointer-events:none;z-index:-1;background:var(--field);mask:url('./images/control-line.svg') center/100% 100% no-repeat;-webkit-mask:url('./images/control-line.svg') center/100% 100% no-repeat}
+.paint-home .painting-title::after{left:calc(-4.3vw - 5px);right:-29px;top:-6px;bottom:-12px;transform:scaleX(-1)}
+.paint-home .paint-cue::after{left:-26px;right:calc(-4.3vw - 6px);top:-2px;bottom:-14px}
+.paint-home .paint-cue:hover span{transform:none}
+@media(max-width:600px){.paint-home .painting-title::after{left:-25px;right:-19px}.paint-home .paint-cue::after{left:-18px;right:-26px}}
+.paint-home .portfolio-header nav::before,.paint-home .painting-title::before,.paint-home .paint-cue::before{mask-mode:luminance}
