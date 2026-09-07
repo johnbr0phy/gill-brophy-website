@@ -30,3 +30,19 @@ html.paint-document{background:#181817;overscroll-behavior-y:none}
 .paint-home .paint-cue span{display:inline-block;transition:transform .2s ease}
 .paint-home .paint-cue:hover span{transform:translateY(4px)}
 @media(prefers-reduced-motion:reduce){.paint-home .paint-cue span{transition:none}.paint-home .paint-cue:hover span{transform:none}}
+/* Black and white paint shapes provide a home for the controls. */
+.paint-home .portfolio-header nav,.paint-home .painting-title,.paint-home .paint-cue{--field:#fff;--field-ink:#191a18;isolation:isolate}
+.paint-home .portfolio-header nav[data-ink="dark"],.paint-home .painting-title[data-ink="dark"],.paint-home .paint-cue[data-ink="dark"]{--field:#191a18;--field-ink:#fff}
+.paint-home .portfolio-header nav{padding-left:18px;padding-right:0}
+.paint-home .portfolio-header nav::before{display:block;background:var(--field)}
+.paint-home .portfolio-header nav a,.paint-home .painting-title,.paint-home .paint-cue,.paint-home .painting-title[data-ink="dark"],.paint-home .paint-cue[data-ink="dark"]{color:var(--field-ink)!important;text-shadow:none!important}
+.paint-home .portfolio-header nav[data-ink="dark"]{text-shadow:none!important}
+.paint-home .painting-title{padding:14px 12px 12px 0;border:0;max-width:min(520px,60vw)}
+.paint-home .paint-cue{padding:13px 0 13px 15px}
+.paint-home .painting-title::before,.paint-home .paint-cue::before{content:"";position:absolute;z-index:-1;pointer-events:none;background:var(--field);transition:background .2s ease}
+.paint-home .painting-title::before{left:-4.3vw;right:-24px;top:-10px;bottom:-8px;clip-path:polygon(0 0,75% 8%,96% 0,100% 75%,95% 97%,37% 88%,0 100%);animation:field-from-left .7s cubic-bezier(.2,.7,.2,1) both}
+.paint-home .paint-cue::before{left:-20px;right:-4.3vw;top:-6px;bottom:-10px;clip-path:polygon(8% 0,63% 10%,100% 4%,100% 100%,25% 89%,0 96%,3% 32%);animation:field-from-right .8s cubic-bezier(.2,.7,.2,1) both}
+.paint-home .portfolio-header nav::before{transition:background .2s ease}
+@media(max-width:600px){.paint-home .portfolio-header nav{padding-left:10px}.paint-home .painting-title::before{left:-20px;right:-14px}.paint-home .paint-cue::before{right:-20px;left:-12px}.paint-home .painting-title{max-width:52vw;padding-top:10px;padding-bottom:10px}.paint-home .paint-cue{padding:10px 0 10px 10px}}
+@media(prefers-reduced-motion:reduce){.paint-home .painting-title::before,.paint-home .paint-cue::before,.paint-home .portfolio-header nav::before{animation:none;transition:none}}
+@media(max-width:600px){.paint-home .painting-title{max-width:44vw}}
