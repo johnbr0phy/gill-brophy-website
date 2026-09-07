@@ -3,3 +3,7 @@
 @media(prefers-reduced-motion:reduce){.paint-backdrop canvas,.painting-title{transition:none}}
 
 @media(max-width:600px){.paint-header{flex-wrap:wrap}.paint-header nav{margin-left:auto}}
+
+/* Keep scroll bounce from exposing the fixed canvas below the footer. */
+html.paint-document{background:#181817;overscroll-behavior-y:none}
+.paint-document .paint-home{overscroll-behavior-y:none}
