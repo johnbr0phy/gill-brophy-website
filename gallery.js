@@ -2,6 +2,7 @@ import {displayTitle,groupPaintings,collectionCovers,openingIds} from './curatio
 const $=id=>document.getElementById(id);
 let works=[],paintings=[],visible=[],current=null,opener=null;
 const params=new URLSearchParams(location.search);$('search').value=params.get('q')||'';
+if(['order','title','newest'].includes(params.get('sort')))$('sort').value=params.get('sort');
 async function load(){try{
  $('gallery-error').hidden=true;const r=await fetch('/gill-brophy-website/works.json');if(!r.ok)throw Error();({works}=await r.json());paintings=groupPaintings(works);
  const names=[...new Set(paintings.map(w=>w.collection).filter(Boolean))].sort();
@@ -35,7 +36,7 @@ function render(){
   const caption=document.createElement('div');caption.className='work-caption';const h=document.createElement('h2');h.textContent=w.title;
   const c=document.createElement('small');c.textContent=w.collection;caption.append(h,c);b.append(img,caption);b.addEventListener('click',()=>{opener=b;open(w.id)});$('gallery').append(b);
  }
- const p=new URLSearchParams();if(q)p.set('q',$('search').value);if(collection)p.set('collection',collection);history.replaceState(null,'','/gill-brophy-website/gallery.html'+(p.size?'?'+p.toString():'')+location.hash);
+ const p=new URLSearchParams();if(q)p.set('q',$('search').value);if(collection)p.set('collection',collection);if($('sort').value!=='order')p.set('sort',$('sort').value);history.replaceState(null,'','/gill-brophy-website/gallery.html'+(p.size?'?'+p.toString():'')+location.hash);
 }
 function open(id){
  const painting=paintings.find(p=>p.views.some(w=>w.id===id));if(!painting)return;
