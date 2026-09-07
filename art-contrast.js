@@ -12,7 +12,7 @@ export function contrastTone(values,previous){
  return mean>.18?'dark':'light';
 }
 export function watchArtContrast(canvas){
- const controls=[...document.querySelectorAll('.portfolio-wordmark')];
+ const controls=[...document.querySelectorAll('.portfolio-wordmark,.paint-cue')];
  const end=document.querySelector('.paint-end');
  const study=document.createElement('canvas');study.width=120;study.height=80;
  const context=study.getContext('2d',{willReadFrequently:true});
@@ -36,7 +36,7 @@ export function watchArtContrast(canvas){
     const p=(py*120+px)*4;values.push(luminance(pixels[p],pixels[p+1],pixels[p+2]));
    }
    control.dataset.ink=contrastTone(values,control.dataset.ink);
-   if(!document.body.dataset.controlTone&&canvas.classList.contains('ready'))document.body.dataset.controlTone=control.dataset.ink;
+   if(control.classList.contains('portfolio-wordmark')&&!document.body.dataset.controlTone&&canvas.classList.contains('ready'))document.body.dataset.controlTone=control.dataset.ink;
   }
  };
 }

@@ -67,3 +67,11 @@ html.paint-document{background:#181817;overscroll-behavior-y:none}
 .paint-home .paint-cue:hover .scroll-hint,.paint-home .paint-cue:focus-visible .scroll-hint{opacity:1}
 @media(prefers-reduced-motion:reduce){.scroll-hint{animation:none;opacity:1}}
 .paint-home .paint-cue.is-dismissed{display:none}
+
+/* Visible immediately in the first viewport, including while the art loads. */
+.paint-home .paint-cue{position:fixed;z-index:15;left:calc(50% - 24px);right:auto;top:auto;bottom:34px;width:48px;height:66px;padding:0;color:#fffaf0!important;filter:drop-shadow(0 1px 2px #000b)}
+.paint-home .paint-cue[data-ink="dark"]{color:#18211b!important;filter:drop-shadow(0 1px 2px #fff)}
+.paint-home .paint-cue[data-ink="light"]{color:#fffaf0!important;filter:drop-shadow(0 1px 2px #000b)}
+.scroll-hint{width:30px;height:60px;stroke-width:1.8;opacity:1}
+@keyframes scroll-invitation{0%,100%{transform:translateY(-5px)}50%{transform:translateY(5px)}}
+@media(max-width:600px){.paint-home .paint-cue{bottom:92px}}
