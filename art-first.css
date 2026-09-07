@@ -24,3 +24,11 @@ body.index-open{overflow:hidden}
 .next-work-peek img{width:100%;height:180px;object-fit:cover;object-position:center;display:block}
 .next-work-peek.is-dismissed{display:none!important}
 @media(max-width:600px){.portfolio-menu-button{font-size:13px}.site-index{padding:25px}.index-links{margin-top:80px}.index-links a{font-size:38px}.work-disclosure{left:22px;bottom:44px}.paint-home .next-work-peek{height:27px;border-top-width:5px}}
+
+/* Each overlay follows the light beneath its own lettering, like the signature. */
+.paint-home .portfolio-menu-button,.paint-home .work-disclosure summary{color:#fffaf0!important;text-shadow:0 1px 2px #000b,0 2px 8px #0008!important;transition:color .18s ease,text-shadow .18s ease}
+.paint-home .portfolio-menu-button[data-ink="dark"],.paint-home .work-disclosure summary[data-ink="dark"]{color:#18211b!important;text-shadow:0 1px 2px #fffc,0 2px 8px #fff8!important}
+.paint-home .menu-lines{filter:drop-shadow(0 1px 2px #0009)}
+.paint-home .portfolio-menu-button[data-ink="dark"] .menu-lines{filter:drop-shadow(0 1px 2px #fffc)}
+.paint-home .work-disclosure summary{font-weight:500}
+@media(prefers-reduced-motion:reduce){.paint-home .portfolio-menu-button,.paint-home .work-disclosure summary{transition:none}}

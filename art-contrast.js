@@ -12,7 +12,7 @@ export function contrastTone(values,previous){
  return mean>.18?'dark':'light';
 }
 export function watchArtContrast(canvas){
- const controls=[...document.querySelectorAll('.portfolio-wordmark,.paint-cue')];
+ const controls=[...document.querySelectorAll('.portfolio-wordmark,.portfolio-menu-button,.work-disclosure summary')];
  const end=document.querySelector('.paint-end');
  const study=document.createElement('canvas');study.width=120;study.height=80;
  const context=study.getContext('2d',{willReadFrequently:true});
