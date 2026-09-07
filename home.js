@@ -7,8 +7,9 @@ import {analyseSurface,chooseBrush,buildRevealMarks,createBrushTips,drawReveal} 
 let paintings=[];
 const STORAGE_KEY='gill-painting-selection-v1';
 const canvas=document.querySelector('#painting'),ctx=canvas.getContext('2d',{alpha:false});
-const title=document.querySelector('#painting-title'),cue=document.querySelector('.paint-cue');
+const title=document.querySelector('#painting-title'),cue=document.querySelector('.next-work-peek');
 const updateContrast=watchArtContrast(canvas);
+const workInfo=document.querySelector('.work-disclosure');
 const preference=matchMedia('(prefers-reduced-motion: reduce)');
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const smooth=v=>{v=clamp(v);return v*v*(3-2*v)};
@@ -92,11 +93,11 @@ function render(){
  if(paintLayer(index,phase)){
   canvas.classList.add('ready');canvas.dataset.painting=paintings[index].id;canvas.dataset.phase=phase.toFixed(3);
   canvas.dataset.brush=reveals[index].style.id;
-  if(active!==index){active=index;title.textContent=displayTitle(paintings[index]);title.href='/gill-brophy-website/gallery.html#'+paintings[index].id}
+  if(active!==index){active=index;document.querySelector('#painting-name').textContent=displayTitle(paintings[index]);document.querySelector('#painting-counter').textContent=String(index+1).padStart(2,'0');title.href='/gill-brophy-website/gallery.html#'+paintings[index].id;workInfo.open=false}
  }
  cue.style.opacity=String(1-smooth(position/.55));
  cue.classList.toggle('is-dismissed',position>=.55);
- const ending=position>paintings.length*SPAN-.25;title.style.opacity=ending?'0':'1';title.style.pointerEvents=ending?'none':'auto';title.tabIndex=ending?-1:0;
+ const ending=position>paintings.length*SPAN-.25;workInfo.hidden=ending;if(ending)workInfo.open=false;
  updateContrast(Math.abs(target-position)<=.0006);
  if(Math.abs(target-position)>.0006)wake();
 }
@@ -146,11 +147,11 @@ async function start(){
   document.querySelector('#paint-journey').style.height=paintings.length*SPAN*100+'svh';
   document.querySelector('#next-painting').style.top=(paintings.length>1?SPAN+.5:.7)*100+'svh';
   document.querySelector('.paint-backdrop').style.backgroundImage='none';
-  canvas.dataset.sequence=paintings.map(p=>p.id).join(',');canvas.dataset.brushes=reveals.map(r=>r.style.id).join(',');title.hidden=false;resize();
+  canvas.dataset.sequence=paintings.map(p=>p.id).join(',');canvas.dataset.brushes=reveals.map(r=>r.style.id).join(',');workInfo.hidden=false;document.querySelector('#painting-total').textContent=String(paintings.length).padStart(2,'0');if(images[1]){cue.querySelector('img').src=images[1].src;cue.hidden=false}resize();
  }catch(error){console.warn('Could not load the gallery:',error);showEmpty('The gallery is taking a moment.');}
 }
 function showEmpty(message){
- document.querySelector('#paint-journey').style.height='45svh';cue.hidden=true;title.hidden=true;
+ document.querySelector('#paint-journey').style.height='45svh';cue.hidden=true;workInfo.hidden=true;
  document.querySelector('.paint-end h2').textContent=message;document.querySelector('.paint-backdrop').style.backgroundImage='none';
 }
 document.fonts.ready.then(()=>updateContrast(true));

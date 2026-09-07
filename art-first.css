@@ -1,0 +1,26 @@
+/* Art first: the artist's mark, one menu, and optional artwork information. */
+.portfolio-menu-button{pointer-events:auto;display:flex;align-items:center;gap:14px;min-height:44px;padding:10px 0;border:0;background:none;color:#29433b;font:14px "Avenir Next",Avenir,"Segoe UI",sans-serif;cursor:pointer}
+.menu-lines{width:24px;height:8px;border-top:1px solid currentColor;border-bottom:1px solid currentColor}
+.paint-home .portfolio-menu-button{color:var(--control-paint);text-shadow:0 1px 8px #ffffff70}
+.paint-home[data-control-tone="light"] .portfolio-menu-button{text-shadow:0 1px 8px #0008}
+.site-index{position:fixed;inset:0;margin:0 0 0 auto;width:min(520px,100%);height:100dvh;max-height:none;max-width:none;border:0;padding:36px 44px;background:#fbfaf6;color:#29433b;box-shadow:-15px 0 70px #0002}
+.site-index::backdrop{background:#0c201e66}
+.index-close{display:block;margin-left:auto;min-height:44px;padding:10px 0;border:0;background:none;font-size:13px}
+.index-links{display:flex;flex-direction:column;gap:27px;margin-top:100px}
+.index-links a{color:inherit;text-decoration:none;font:42px/1.15 Georgia,serif}
+.index-links a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:9px}
+.index-links a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:9px}
+.index-signoff{position:absolute;bottom:38px;font:20px Georgia,serif}
+body.index-open{overflow:hidden}
+.work-disclosure{position:fixed;z-index:12;bottom:52px;left:4.3vw;color:var(--control-paint);font:12px "Avenir Next",Avenir,"Segoe UI",sans-serif;text-shadow:0 1px 8px #fff6}
+.paint-home[data-control-tone="light"] .work-disclosure{text-shadow:0 1px 8px #0008}
+.work-disclosure summary{list-style:none;cursor:pointer;padding:12px 0;min-height:44px;letter-spacing:.08em;width:max-content}
+.work-disclosure summary::-webkit-details-marker{display:none}
+.work-divider{opacity:.55;margin:0 9px}
+.work-disclosure-panel{position:absolute;bottom:52px;left:0;width:min(290px,80vw);padding:24px;background:#fbfaf6;color:#29433b;text-shadow:none;box-shadow:0 5px 30px #0002}
+.work-disclosure-panel p{font:22px/1.4 Georgia,serif;margin:0 0 17px}
+.work-disclosure-panel a{font:12px "Avenir Next",Avenir,"Segoe UI",sans-serif;text-decoration:none;border-bottom:1px solid #aeb7aa;padding-bottom:5px}
+.paint-home .next-work-peek{position:fixed;z-index:10;inset:auto 0 0;width:100%;height:34px;display:block;border-top:7px solid #fbfaf6;background:#fbfaf6;overflow:hidden}
+.next-work-peek img{width:100%;height:180px;object-fit:cover;object-position:center;display:block}
+.next-work-peek.is-dismissed{display:none!important}
+@media(max-width:600px){.portfolio-menu-button{font-size:13px}.site-index{padding:25px}.index-links{margin-top:80px}.index-links a{font-size:38px}.work-disclosure{left:22px;bottom:44px}.paint-home .next-work-peek{height:27px;border-top-width:5px}}
