@@ -97,8 +97,9 @@ function wake(){if(!raf&&!document.hidden)raf=requestAnimationFrame(render)}
 function readScroll(){target=scrollY/viewportHeight;wake()}
 function resize(){
  viewportHeight=document.documentElement.clientHeight||innerHeight;
- dpr=Math.min(devicePixelRatio,1.4);const scale=Math.min(1,1700/(innerWidth*dpr));
- width=Math.round(innerWidth*dpr*scale);height=Math.round(viewportHeight*dpr*scale);
+ const bounds=canvas.getBoundingClientRect();
+ dpr=Math.min(devicePixelRatio,1.4);const scale=Math.min(1,1700/(bounds.width*dpr));
+ width=Math.max(1,Math.round(bounds.width*dpr*scale));height=Math.max(1,Math.round(bounds.height*dpr*scale));
  canvas.width=mask.width=layer.width=width;canvas.height=mask.height=layer.height=height;
  prepared.clear();target=scrollY/viewportHeight;position=target;
  // Resizing clears the canvas: repaint in the same task, before the browser presents it.

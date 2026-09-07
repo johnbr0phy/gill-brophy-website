@@ -66,3 +66,14 @@ body.index-open{overflow:hidden}
 @media(prefers-reduced-motion:reduce){.scroll-invitation svg{animation:none}}
 /* Let a slight hint of the artwork show through the white masthead. */
 .portfolio-header,.gallery-page .portfolio-header,.about-page .portfolio-header{background:rgba(255,255,255,.94)}
+
+/* A square painting surface, centred in a white page. */
+html.paint-document,.paint-document .paint-home{background:#fff}
+.paint-home{--masthead-space:79px;--art-size:min(880px,calc(100vw - 48px),calc(100svh - var(--masthead-space) - 104px));--art-top:calc(var(--masthead-space) + (100svh - var(--masthead-space) - 72px - var(--art-size))/2)}
+.paint-home .paint-backdrop{inset:auto;top:var(--art-top);left:50%;transform:translateX(-50%);width:var(--art-size);height:var(--art-size);background:#fff}
+.paint-home .scroll-invitation{top:calc(var(--art-top) + var(--art-size) + 14px);bottom:auto;min-height:44px;flex-direction:row;padding:4px 0;gap:12px;color:#29433b;font-size:14px;text-shadow:none}
+.paint-home .scroll-invitation::before{display:none}
+.paint-home .scroll-invitation svg{width:20px;height:30px;filter:none}
+.paint-home .paint-end,.paint-home .paint-footer{background:#fff;color:#29433b}
+.paint-home .paint-footer a,.paint-home .paint-gallery-link{color:#29433b}
+@media(max-width:600px){.paint-home{--masthead-space:61px;--art-size:min(880px,calc(100vw - 32px),calc(100svh - var(--masthead-space) - 104px))}}
