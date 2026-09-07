@@ -7,6 +7,7 @@ let paintings=[];
 const STORAGE_KEY='gill-painting-selection-v1';
 const canvas=document.querySelector('#painting'),ctx=canvas.getContext('2d',{alpha:false});
 const cue=document.querySelector('.scroll-invitation');
+let cueRevealScheduled=false;
 const preference=matchMedia('(prefers-reduced-motion: reduce)');
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const smooth=v=>{v=clamp(v);return v*v*(3-2*v)};
@@ -86,6 +87,11 @@ function render(){
  position=gentle||Math.abs(difference)>.8||Math.abs(difference)<.0006?target:position+difference*.22;
  const {index,phase}=paintingProgress(position,paintings.length,SPAN);
  if(paintLayer(index,phase)){
+  if(!cueRevealScheduled){
+   cueRevealScheduled=true;
+   // Wait until the first painted frame has completed its .35s canvas fade-in.
+   setTimeout(()=>{cue.hidden=paintings.length<2},400);
+  }
   canvas.classList.add('ready');canvas.dataset.painting=paintings[index].id;canvas.dataset.phase=phase.toFixed(3);
   canvas.dataset.brush=reveals[index].style.id;
  }
@@ -140,7 +146,7 @@ async function start(){
   document.querySelector('#paint-journey').style.height=(Math.max(1,paintings.length-1)*SPAN+1)*100+'svh';
   document.querySelector('#next-painting').style.top='55svh';
   document.querySelector('.paint-backdrop').style.backgroundImage='none';
-  canvas.dataset.sequence=paintings.map(p=>p.id).join(',');canvas.dataset.brushes=reveals.map(r=>r.style.id).join(',');cue.hidden=paintings.length<2;resize();
+  canvas.dataset.sequence=paintings.map(p=>p.id).join(',');canvas.dataset.brushes=reveals.map(r=>r.style.id).join(',');resize();
  }catch(error){console.warn('Could not load the gallery:',error);showEmpty('The gallery is taking a moment.');}
 }
 function showEmpty(message){
