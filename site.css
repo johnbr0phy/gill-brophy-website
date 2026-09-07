@@ -42,6 +42,16 @@
 .gallery-page .viewer-art{height:calc(100dvh - 245px)}
 @media(max-width:700px){.gallery-page .gallery-intro{padding:30px 22px;display:block}.gallery-page .gallery-intro p{margin-top:16px}.collections-section{padding:0 22px;margin-bottom:35px}.collection-previews{gap:18px}.collection-tile{flex-basis:146px}.collection-tile img{width:146px;height:112px}.results-heading{padding:0 22px}.results-heading h2{font-size:27px}.gallery-page .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:38px 22px}.gallery-page .work-card img{height:220px}.gallery-page .work-card h2{font-size:16px}.gallery-page .work-card .work-caption{padding-top:12px}}
 @media(max-width:390px){.gallery-page .work-card img{height:180px}}
-/* Plain navigation on light pages; the artwork homepage keeps its contrast treatment. */
-.gallery-page .portfolio-header nav,.about-page .portfolio-header nav{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-radius:0;padding:11px 0}
-.gallery-page .portfolio-header nav a,.about-page .portfolio-header nav a{color:#29433b}
+/* Menu lettering and brush marks borrow the warm paper, ochre and vermilion
+   of Gill's paintings. Opaque paper keeps the links readable over every work. */
+.portfolio-header nav{position:relative;isolation:isolate;gap:27px;padding:10px 22px;background:transparent;border-radius:0;backdrop-filter:none;-webkit-backdrop-filter:none;font:italic 18px/1.3 Georgia,serif}
+.portfolio-header nav::before{content:"";position:absolute;inset:0;z-index:-1;background:#faf4e7;border-radius:3% 2% 4% 2% / 15% 9% 17% 12%;transform:rotate(-.6deg)}
+.portfolio-header nav a{position:relative;display:flex;align-items:center;min-height:44px;padding:6px 0;color:#34392f;text-decoration:none}
+.portfolio-header nav a::after{content:"";position:absolute;left:-2px;right:-3px;bottom:5px;height:5px;background:#c76b49;clip-path:polygon(0 35%,12% 12%,41% 28%,70% 0,100% 30%,96% 66%,59% 82%,24% 62%,2% 100%);transform:scaleX(.28) rotate(-2deg);transform-origin:left;opacity:0;transition:transform .22s ease,opacity .22s ease}
+.portfolio-header nav a:nth-child(2)::after{background:#ba8b36;transform:scaleX(.28) rotate(1deg)}
+.portfolio-header nav a:hover::after,.portfolio-header nav a:focus-visible::after,.portfolio-header nav a[aria-current="page"]::after{transform:scaleX(1) rotate(-2deg);opacity:1}
+.portfolio-header nav a:nth-child(2):hover::after,.portfolio-header nav a:nth-child(2):focus-visible::after,.portfolio-header nav a:nth-child(2)[aria-current="page"]::after{transform:scaleX(1) rotate(1deg)}
+.portfolio-header nav a:focus-visible{outline:2px solid #804128;outline-offset:5px}
+.gallery-page .portfolio-header nav,.about-page .portfolio-header nav{padding:10px 0}
+.gallery-page .portfolio-header nav::before,.about-page .portfolio-header nav::before{display:none}
+@media(max-width:600px){.portfolio-header{padding:18px 22px;gap:10px}.portfolio-header nav{gap:21px;padding:5px 14px;font-size:16px}.portfolio-wordmark{font-size:23px}.gallery-page .portfolio-header nav,.about-page .portfolio-header nav{padding:5px 0}}
