@@ -35,11 +35,21 @@ const whiteBackgroundIds=new Set([
  "fdd2cf101e2890ed008bf724", // Ten Red Buds
  "6af17d6760b477664e746acc", // Spook
 ]);
+// Source-photo softness or limited usable detail at homepage crop sizes.
+// This is a presentation choice, not a judgement of the painting itself.
+export const homepageQualityExclusions=new Set([
+ "c00c91feafa8c9a81484d4f9", // Artwork 01
+ "03f01827981a06216085ce1f", // Walkies Anyone
+ "b7c79eee6a7057c841393d13", // Inspired by Elda — 4
+ "2c2cc5ebb931158ff6b1500e", // Inspired by Elda — 1
+ "2d875f6cefcedff971a4fe73", // Inspired by Elda — 2
+ "2507105e0e94706030726e1a", // Inspired by Elda — 3
+]);
 // Select once per page load. Scrolling never changes this sequence.
 const shuffled=(values,random)=>{const result=[...values];for(let i=result.length-1;i>0;i--){const j=Math.min(i,Math.floor(random()*(i+1)));[result[i],result[j]]=[result[j],result[i]]}return result};
 export function selectGalleryWorks(works,previous=[],count=8,random=Math.random){
  previous=Array.isArray(previous)?previous:[];
- const unique=[...new Map(groupPaintings(works.filter(Boolean)).map(w=>works.find(source=>source?.id===w.id)).filter(w=>w&&w.published!==false&&!whiteBackgroundIds.has(w.id)&&typeof w.id==='string'&&typeof w.image==='string').map(w=>[w.id,w])).values()];
+ const unique=[...new Map(groupPaintings(works.filter(Boolean)).map(w=>works.find(source=>source?.id===w.id)).filter(w=>w&&w.published!==false&&!whiteBackgroundIds.has(w.id)&&!homepageQualityExclusions.has(w.id)&&typeof w.id==='string'&&typeof w.image==='string').map(w=>[w.id,w])).values()];
  const old=new Set(previous),fresh=shuffled(unique.filter(w=>!old.has(w.id)),random),recent=shuffled(unique.filter(w=>old.has(w.id)),random);
  const preferred=fresh.filter(w=>openingIds.includes(w.id));
  const reserve=recent.filter(w=>openingIds.includes(w.id)&&w.id!==previous[0]);
