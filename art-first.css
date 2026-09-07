@@ -79,3 +79,9 @@ html.paint-document,.paint-document .paint-home{background:#fff}
 .paint-home .portfolio-header{transition:transform .22s ease}
 .paint-home .portfolio-header.is-scrolled-away{transform:translateY(-100%)}
 @media(prefers-reduced-motion:reduce){.paint-home .portfolio-header{transition:none}}
+
+/* Keep the mobile menu typography consistent with its Menu trigger. */
+.site-index .index-links a{font:600 15px/1.4 "Avenir Next",Avenir,"Segoe UI",sans-serif;letter-spacing:.01em;min-height:44px;display:flex;align-items:center}
+.site-index .index-links{gap:16px}
+.site-index .index-close{display:flex;align-items:center;justify-content:center;gap:14px;color:#29433b;font:600 15px/1.4 "Avenir Next",Avenir,"Segoe UI",sans-serif;letter-spacing:.01em;background:none;border:0}
+.site-index .index-close span{font:inherit;font-size:26px;line-height:1;width:25px;text-align:center}
