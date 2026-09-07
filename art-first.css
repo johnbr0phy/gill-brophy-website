@@ -67,12 +67,10 @@ body.index-open{overflow:hidden}
 /* Let a slight hint of the artwork show through the white masthead. */
 .portfolio-header,.gallery-page .portfolio-header,.about-page .portfolio-header{background:rgba(255,255,255,.94)}
 
-/* Full-height artwork in a centred column, with white margins only at the sides. */
+/* The paintings fill the viewport, edge to edge. */
 html.paint-document,.paint-document .paint-home{background:#fff}
-.paint-home{--art-width:min(100svh,calc(100vw - 48px))}
-.paint-home .paint-backdrop{inset:0 auto 0 50%;transform:translateX(-50%);width:var(--art-width);height:100%;background:#fff}
+.paint-home .paint-backdrop{inset:0;transform:none;width:100%;height:100%;background:#fff}
 .paint-home .paint-end,.paint-home .paint-footer{background:#fff;color:#29433b}
 .paint-home .paint-footer a,.paint-home .paint-gallery-link{color:#29433b}
-@media(max-width:600px){.paint-home{--art-width:calc(100vw - 32px)}}
 
 .paint-home .paint-footer{justify-content:center}
