@@ -32,3 +32,12 @@ body.index-open{overflow:hidden}
 .paint-home .portfolio-menu-button[data-ink="dark"] .menu-lines{filter:drop-shadow(0 1px 2px #fffc)}
 .paint-home .work-disclosure summary{font-weight:500}
 @media(prefers-reduced-motion:reduce){.paint-home .portfolio-menu-button,.paint-home .work-disclosure summary{transition:none}}
+/* A stable white masthead keeps navigation readable on every painting. */
+.portfolio-header,.gallery-page .portfolio-header,.about-page .portfolio-header{background:#fff;padding:12px 4.3%;min-height:104px;border-bottom:1px solid #0000000b}
+.portfolio-header .portfolio-wordmark,.paint-home .portfolio-wordmark,.paint-home .portfolio-wordmark[data-ink="dark"]{background:transparent;color:#29433b!important;filter:none;text-shadow:none!important}
+.paint-home .portfolio-menu-button,.paint-home .portfolio-menu-button[data-ink="dark"],.portfolio-menu-button{color:#29433b!important;text-shadow:none!important;font-size:15px;font-weight:600;letter-spacing:.01em}
+.paint-home .menu-lines,.paint-home .portfolio-menu-button[data-ink="dark"] .menu-lines,.menu-lines{filter:none;border-top-width:2px;border-bottom-width:2px;height:10px;width:25px}
+.scroll-invitation{position:fixed;z-index:12;bottom:32px;left:calc(50% - 43px);width:86px;display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 0;color:#fff;text-decoration:none;font:12px "Avenir Next",Avenir,"Segoe UI",sans-serif;text-shadow:0 1px 3px #000,0 0 8px #0008}
+.scroll-invitation svg{width:16px;height:26px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 2px #000)}
+.scroll-invitation.is-dismissed{display:none}
+@media(max-width:600px){.portfolio-header,.gallery-page .portfolio-header,.about-page .portfolio-header{padding:13px 22px;min-height:80px}.scroll-invitation{bottom:max(22px,env(safe-area-inset-bottom))}.portfolio-menu-button{font-size:14px}}

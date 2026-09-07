@@ -1,5 +1,4 @@
-import {watchArtContrast} from './art-contrast.js';
-import {displayTitle} from './curation.js';
+import {paintingProgress} from './scroll-progress.js';
 import {focalPointFor,coverPlacement} from './focal-points.js';
 import {buildStrokes} from './paint-strokes.js';
 import {selectGalleryWorks,scoreForWork} from './gallery-sequence.js';
@@ -7,9 +6,7 @@ import {analyseSurface,chooseBrush,buildRevealMarks,createBrushTips,drawReveal} 
 let paintings=[];
 const STORAGE_KEY='gill-painting-selection-v1';
 const canvas=document.querySelector('#painting'),ctx=canvas.getContext('2d',{alpha:false});
-const title=document.querySelector('#painting-title'),cue=document.querySelector('.next-work-peek');
-const updateContrast=watchArtContrast(canvas);
-const workInfo=document.querySelector('.work-disclosure');
+const cue=document.querySelector('.scroll-invitation');
 const preference=matchMedia('(prefers-reduced-motion: reduce)');
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const smooth=v=>{v=clamp(v);return v*v*(3-2*v)};
@@ -68,7 +65,7 @@ function paintLayer(index,phase){
  if(gentle){ctx.drawImage(current.source,0,0);return true}
  ctx.drawImage(previous?previous.source:current.wash,0,0);
  // Incoming colour gradually replaces the preceding painted ground; there is always artwork underneath.
- if(previous){ctx.globalAlpha=smooth(phase/.62)*.88;ctx.drawImage(current.wash,0,0);ctx.globalAlpha=1}
+ if(previous){ctx.globalAlpha=clamp(phase/.62)*.88;ctx.drawImage(current.wash,0,0);ctx.globalAlpha=1}
  if(phase>=.98){ctx.drawImage(current.source,0,0);return true}
  ink.clearRect(0,0,width,height);ink.globalCompositeOperation='source-over';
  const reveal=reveals[index];
@@ -87,18 +84,13 @@ function paintLayer(index,phase){
 function render(){
  raf=0;if(!paintings.length)return;const difference=target-position;
  position=gentle||Math.abs(difference)>.8||Math.abs(difference)<.0006?target:position+difference*.22;
- const step=clamp(position/SPAN,0,paintings.length-.0001),index=Math.floor(step),local=step-index;
- // Open on the complete painting; brush reveals begin with the next artwork.
- const phase=index===0?1:smooth(clamp((local-.06)/.58));
+ const {index,phase}=paintingProgress(position,paintings.length,SPAN);
  if(paintLayer(index,phase)){
   canvas.classList.add('ready');canvas.dataset.painting=paintings[index].id;canvas.dataset.phase=phase.toFixed(3);
   canvas.dataset.brush=reveals[index].style.id;
-  if(active!==index){active=index;document.querySelector('#painting-name').textContent=displayTitle(paintings[index]);document.querySelector('#painting-counter').textContent=String(index+1).padStart(2,'0');title.href='/gill-brophy-website/gallery.html#'+paintings[index].id;workInfo.open=false}
  }
  cue.style.opacity=String(1-smooth(position/.55));
  cue.classList.toggle('is-dismissed',position>=.55);
- const ending=position>paintings.length*SPAN-.25;workInfo.hidden=ending;if(ending)workInfo.open=false;
- updateContrast(Math.abs(target-position)<=.0006);
  if(Math.abs(target-position)>.0006)wake();
 }
 function wake(){if(!raf&&!document.hidden)raf=requestAnimationFrame(render)}
@@ -144,15 +136,14 @@ async function start(){
   }
   try{sessionStorage.setItem(BRUSH_KEY,JSON.stringify(priorBrushes))}catch{}
   try{sessionStorage.setItem(STORAGE_KEY,JSON.stringify(paintings.map(p=>p.id)))}catch{}
-  document.querySelector('#paint-journey').style.height=paintings.length*SPAN*100+'svh';
-  document.querySelector('#next-painting').style.top=(paintings.length>1?SPAN+.5:.7)*100+'svh';
+  document.querySelector('#paint-journey').style.height=(Math.max(1,paintings.length-1)*SPAN+1)*100+'svh';
+  document.querySelector('#next-painting').style.top='55svh';
   document.querySelector('.paint-backdrop').style.backgroundImage='none';
-  canvas.dataset.sequence=paintings.map(p=>p.id).join(',');canvas.dataset.brushes=reveals.map(r=>r.style.id).join(',');workInfo.hidden=false;document.querySelector('#painting-total').textContent=String(paintings.length).padStart(2,'0');if(images[1]){cue.querySelector('img').src=images[1].src;cue.hidden=false}resize();
+  canvas.dataset.sequence=paintings.map(p=>p.id).join(',');canvas.dataset.brushes=reveals.map(r=>r.style.id).join(',');cue.hidden=paintings.length<2;resize();
  }catch(error){console.warn('Could not load the gallery:',error);showEmpty('The gallery is taking a moment.');}
 }
 function showEmpty(message){
- document.querySelector('#paint-journey').style.height='45svh';cue.hidden=true;workInfo.hidden=true;
+ document.querySelector('#paint-journey').style.height='45svh';cue.hidden=true;
  document.querySelector('.paint-end h2').textContent=message;document.querySelector('.paint-backdrop').style.backgroundImage='none';
 }
-document.fonts.ready.then(()=>updateContrast(true));
 resize();start();
