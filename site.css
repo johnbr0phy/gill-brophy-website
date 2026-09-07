@@ -74,3 +74,7 @@
 .viewer-views button::after{content:"";position:absolute;bottom:2px;left:0;right:0;height:3px;background:#bd7352;clip-path:polygon(0 35%,33% 0,100% 22%,96% 70%,20% 100%);opacity:0}
 .viewer-views button[aria-pressed=true]::after,.viewer-views button:hover::after{opacity:1}
 @media(max-width:600px){.portfolio-wordmark{width:108px;height:53px}}
+
+/* Transparent original ink on every page, without the photographed paper. */
+.gallery-page .portfolio-wordmark,.about-page .portfolio-wordmark{background:transparent;border-radius:0}
+.gallery-page .artist-signature,.about-page .artist-signature{filter:none;mix-blend-mode:normal}
