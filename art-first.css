@@ -74,3 +74,5 @@ html.paint-document,.paint-document .paint-home{background:#fff}
 .paint-home .paint-end,.paint-home .paint-footer{background:#fff;color:#29433b}
 .paint-home .paint-footer a,.paint-home .paint-gallery-link{color:#29433b}
 @media(max-width:600px){.paint-home{--art-width:calc(100vw - 32px)}}
+
+.paint-home .paint-footer{justify-content:center}
