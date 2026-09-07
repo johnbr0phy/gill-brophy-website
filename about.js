@@ -1,5 +1,5 @@
 // Use the live published library, so hidden works never leak through the about page.
-const choices={hero:/GB075 Flora - The Orange Tulips\.jpg/i,closing:/GB164 Flora- Bouquet in Blue & Gold\.jpg/i};
+const choices={hero:/GB024 Flora - The Ribbon\.jpg/i,closing:/GB164 Flora- Bouquet in Blue & Gold\.jpg/i};
 try{
  const response=await fetch('/gill-brophy-website/works.json',{cache:'no-store'});if(!response.ok)throw Error('Gallery unavailable');
  const {works}=await response.json();const used=new Set();
