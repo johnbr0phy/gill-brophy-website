@@ -64,15 +64,13 @@
 @media(max-width:600px){.portfolio-wordmark{width:124px;height:61px}}
 .paint-home .portfolio-wordmark{background:#faf4e7}
 .paint-home .artist-signature{mix-blend-mode:multiply}
-/* Original signature-inspired alphabet; unsampled letters are interpretations. */
-@font-face{font-family:"Gill Hand";src:url("./fonts/gill-hand.ttf") format("truetype");font-weight:100 900;font-style:normal;font-display:swap}
-html body,html body *,html body *::before,html body *::after{font-family:"Gill Hand",cursive!important;font-style:normal!important;letter-spacing:0!important;font-synthesis:none}
-.portfolio-header nav{font-size:24px;gap:28px}
-.gallery-page .gallery-intro p,.gallery-page .gallery-tools input,.gallery-page .gallery-tools select,.collection-tile span,.results-heading span,.gallery-page .work-card small,.viewer-caption p,.viewer-views button,.site-footer,.status{font-size:19px}
-.collection-tile small{font-size:17px}.gallery-page .work-card h2{font-size:26px;line-height:1.4}.collection-tile{flex-basis:190px}
-.about-page .artist-copy>p:not(.artist-label):not(.artist-lead){font-size:22px;line-height:1.65}
-.about-page .artist-label,.about-page .artist-link,.about-page .artist-pair figcaption{font-size:19px}
-.about-page .artist-copy .artist-lead{font-size:29px;line-height:1.5}
-.paint-home .paint-cue,.paint-home .painting-title{font-size:19px}
-.paint-home .paint-gallery-link{font-size:25px}.paint-home .paint-footer{font-size:18px}
-@media(max-width:600px){.portfolio-header nav{font-size:20px;gap:18px;padding:5px 12px}.portfolio-wordmark{width:108px;height:53px}.gallery-page .work-card h2{font-size:23px}.paint-home .paint-cue,.paint-home .painting-title{font-size:17px}.about-page .artist-copy>p:not(.artist-label):not(.artist-lead){font-size:21px}}
+
+/* Open text controls replace enclosed pills. */
+.portfolio-header nav::before{display:none}
+.portfolio-header nav{padding-left:0;padding-right:0}
+.viewer-views{gap:24px}
+.viewer-views button{position:relative;border:0;border-radius:0;background:transparent;padding:10px 1px;color:#63756b}
+.viewer-views button[aria-pressed=true]{background:transparent;color:#29433b;border-color:transparent}
+.viewer-views button::after{content:"";position:absolute;bottom:2px;left:0;right:0;height:3px;background:#bd7352;clip-path:polygon(0 35%,33% 0,100% 22%,96% 70%,20% 100%);opacity:0}
+.viewer-views button[aria-pressed=true]::after,.viewer-views button:hover::after{opacity:1}
+@media(max-width:600px){.portfolio-wordmark{width:108px;height:53px}}

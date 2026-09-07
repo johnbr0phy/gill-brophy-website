@@ -24,3 +24,9 @@ html.paint-document{background:#181817;overscroll-behavior-y:none}
 .paint-home .portfolio-wordmark[data-ink="dark"]{filter:drop-shadow(0 1px 1px #fffa) drop-shadow(0 2px 5px #fff7)}
 .paint-home .paint-gallery-link{color:#fffaf0;border-bottom:1px solid #d7b674;padding:12px 0;text-shadow:none}
 @media(prefers-reduced-motion:reduce){.paint-home .portfolio-wordmark,.paint-home .portfolio-header nav a,.paint-home .painting-title,.paint-home .paint-cue{transition:none}}
+/* Quiet labels and an open directional cue, without a button container. */
+.paint-home .painting-title{padding:8px 0;border-bottom:1px solid currentColor}
+.paint-home .paint-cue{padding-left:0;padding-right:0;gap:14px}
+.paint-home .paint-cue span{display:inline-block;transition:transform .2s ease}
+.paint-home .paint-cue:hover span{transform:translateY(4px)}
+@media(prefers-reduced-motion:reduce){.paint-home .paint-cue span{transition:none}.paint-home .paint-cue:hover span{transform:none}}
