@@ -1,3 +1,4 @@
+import {displayTitle} from './curation.js';
 import {focalPointFor,coverPlacement} from './focal-points.js';
 import {buildStrokes} from './paint-strokes.js';
 import {selectGalleryWorks,scoreForWork} from './gallery-sequence.js';
@@ -9,7 +10,7 @@ const title=document.querySelector('#painting-title'),cue=document.querySelector
 const preference=matchMedia('(prefers-reduced-motion: reduce)');
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const smooth=v=>{v=clamp(v);return v*v*(3-2*v)};
-const SPAN=1.4,images=[],programs=[],reveals=[];
+const SPAN=1.65,images=[],programs=[],reveals=[];
 const BRUSH_KEY='gill-reveal-brushes-v1',visitSeed=Math.random().toString(36).slice(2);
 const prepared=new Map();
 let width=0,height=0,dpr=1,viewportHeight=innerHeight,raf=0,position=0,target=0,gentle=preference.matches,active=-1;
@@ -85,11 +86,11 @@ function render(){
  position=gentle||Math.abs(difference)>.8||Math.abs(difference)<.0006?target:position+difference*.22;
  const step=clamp(position/SPAN,0,paintings.length-.0001),index=Math.floor(step),local=step-index;
  // Open on the complete painting; brush reveals begin with the next artwork.
- const phase=index===0?1:smooth(clamp(local/.84));
+ const phase=index===0?1:smooth(clamp((local-.06)/.58));
  if(paintLayer(index,phase)){
   canvas.classList.add('ready');canvas.dataset.painting=paintings[index].id;canvas.dataset.phase=phase.toFixed(3);
   canvas.dataset.brush=reveals[index].style.id;
-  if(active!==index){active=index;title.textContent=paintings[index].title;title.href='/gill-brophy-website/gallery.html#'+paintings[index].id}
+  if(active!==index){active=index;title.textContent=displayTitle(paintings[index]);title.href='/gill-brophy-website/gallery.html#'+paintings[index].id}
  }
  cue.style.opacity=String(1-smooth(position/.55));
  const ending=position>paintings.length*SPAN-.25;title.style.opacity=ending?'0':'1';title.style.pointerEvents=ending?'none':'auto';title.tabIndex=ending?-1:0;
@@ -130,7 +131,7 @@ async function start(){
    const score=scoreForWork(work);paintings.push({...work,key:score,src:work.image,focus:focalPointFor(work)});images.push(image);
    studyContext.clearRect(0,0,64,64);studyContext.drawImage(image,0,0,64,64);
    let study={};try{study=analyseSurface(studyContext.getImageData(0,0,64,64))}catch{}
-   const style=chooseBrush(work,study,usedBrushes,priorBrushes[work.id]);
+   const style=chooseBrush(work,study,usedBrushes,priorBrushes[work.id],Math.random,['watercolour','loaded-mop','dry-bristle','flat-brush','filbert','rag']);
    const seed=visitSeed+':'+work.id+':'+style.id;
    reveals.push({style,marks:buildRevealMarks(style,seed),tips:createBrushTips(style,seed)});
    usedBrushes.push(style.id);priorBrushes[work.id]=style.id;

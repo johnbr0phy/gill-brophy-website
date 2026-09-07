@@ -1,3 +1,4 @@
+import {openingIds,groupPaintings} from './curation.js';
 // Visually reviewed white/off-white grounds. These remain available in the gallery.
 const whiteBackgroundIds=new Set([
  "eae70281444a71af01b1fccc", // Artwork 04
@@ -38,9 +39,13 @@ const whiteBackgroundIds=new Set([
 const shuffled=(values,random)=>{const result=[...values];for(let i=result.length-1;i>0;i--){const j=Math.min(i,Math.floor(random()*(i+1)));[result[i],result[j]]=[result[j],result[i]]}return result};
 export function selectGalleryWorks(works,previous=[],count=8,random=Math.random){
  previous=Array.isArray(previous)?previous:[];
- const unique=[...new Map(works.filter(w=>w&&w.published!==false&&!whiteBackgroundIds.has(w.id)&&typeof w.id==='string'&&typeof w.image==='string').map(w=>[w.id,w])).values()];
+ const unique=[...new Map(groupPaintings(works.filter(Boolean)).map(w=>works.find(source=>source?.id===w.id)).filter(w=>w&&w.published!==false&&!whiteBackgroundIds.has(w.id)&&typeof w.id==='string'&&typeof w.image==='string').map(w=>[w.id,w])).values()];
  const old=new Set(previous),fresh=shuffled(unique.filter(w=>!old.has(w.id)),random),recent=shuffled(unique.filter(w=>old.has(w.id)),random);
- const selected=[...fresh,...recent].slice(0,Math.max(0,count));
+ const preferred=fresh.filter(w=>openingIds.includes(w.id));
+ const reserve=recent.filter(w=>openingIds.includes(w.id)&&w.id!==previous[0]);
+ const opening=preferred[0]||reserve[0];
+ const ordered=opening?[opening,...fresh.filter(w=>w.id!==opening.id),...recent.filter(w=>w.id!==opening.id)]:[...fresh,...recent];
+ const selected=ordered.slice(0,Math.max(0,count));
  if(selected.length>1&&selected[0].id===previous[0]){const i=selected.findIndex(w=>w.id!==previous[0]);[selected[0],selected[i]]=[selected[i],selected[0]]}
  return selected;
 }

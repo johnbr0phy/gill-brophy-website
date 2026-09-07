@@ -18,3 +18,27 @@
 .portfolio-header a:focus-visible{outline:2px solid #f2cb7c;outline-offset:6px}
 .gallery-page{padding-top:104px}.gallery-page .portfolio-header{background:#f8f9f5f5}.gallery-page .portfolio-wordmark{color:#29433b;text-shadow:none}
 @media(max-width:600px){.portfolio-header{padding:22px;gap:14px;flex-wrap:wrap}.portfolio-header nav{margin-left:auto;gap:18px}.portfolio-wordmark{font-size:24px}.gallery-page{padding-top:125px}}
+/* A quieter exhibition layout, with the paintings carrying the colour. */
+.gallery-page .gallery-intro{max-width:1500px;margin:auto;padding:64px 6vw 44px;align-items:end}
+.gallery-page .gallery-intro h1{font-size:clamp(44px,5.5vw,80px);letter-spacing:-.045em}
+.collections-section{max-width:1500px;margin:0 auto 65px;padding:0 6vw}
+.collection-previews{display:flex;gap:25px;overflow-x:auto;padding:0 0 18px;scroll-snap-type:x proximity;scrollbar-width:thin}
+.collection-tile{flex:0 0 176px;text-decoration:none;scroll-snap-align:start;display:block;padding-bottom:9px;border-bottom:2px solid transparent}
+.collection-tile img{width:176px;height:132px;object-fit:cover;display:block;margin-bottom:14px}
+.collection-tile span{display:block;font-size:13px;line-height:1.4}.collection-tile small{display:block;font-size:11px;color:#63756b;margin-top:5px}
+.collection-tile[aria-current]{border-color:#29433b}
+#gallery-results{scroll-margin-top:120px;max-width:1500px;margin:auto}
+.results-heading{padding:0 6vw;display:flex;align-items:baseline;justify-content:space-between;gap:20px}
+.results-heading h2{font:32px Georgia,serif;margin:0}.results-heading span{font-size:12px;color:#63756b}
+.gallery-page .gallery-tools{padding-top:24px;padding-bottom:38px}
+.gallery-page .gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:64px 44px}
+.gallery-page .work-card{margin:0}
+.gallery-page .work-card img{height:330px;object-fit:contain;background:transparent}
+.gallery-page .work-card .work-caption{display:block;padding-top:20px}
+.gallery-page .work-card h2{font:20px/1.35 Georgia,serif}.gallery-page .work-card small{display:block;font-size:11px;margin-top:7px;color:#63756b;white-space:normal}
+.viewer-views{display:flex;justify-content:center;gap:8px;margin:0 0 12px}
+.viewer-views button{background:transparent;border:1px solid #ccd3ce;border-radius:20px;padding:7px 14px;font-size:11px}
+.viewer-views button[aria-pressed=true]{background:#29433b;color:#fff;border-color:#29433b}
+.gallery-page .viewer-art{height:calc(100dvh - 245px)}
+@media(max-width:700px){.gallery-page .gallery-intro{padding:30px 22px;display:block}.gallery-page .gallery-intro p{margin-top:16px}.collections-section{padding:0 22px;margin-bottom:35px}.collection-previews{gap:18px}.collection-tile{flex-basis:146px}.collection-tile img{width:146px;height:112px}.results-heading{padding:0 22px}.results-heading h2{font-size:27px}.gallery-page .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:38px 22px}.gallery-page .work-card img{height:220px}.gallery-page .work-card h2{font-size:16px}.gallery-page .work-card .work-caption{padding-top:12px}}
+@media(max-width:390px){.gallery-page .work-card img{height:180px}}

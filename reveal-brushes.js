@@ -54,10 +54,12 @@ export function surfaceAffinity(work,study={}){
  return 'atmospheric';
 }
 
-export function chooseBrush(work,study,used=[],previous='',random=Math.random){
+export function chooseBrush(work,study,used=[],previous='',random=Math.random,allowed=null){
  const affinity=surfaceAffinity(work,study);
- let pool=BRUSH_STYLES.filter(s=>!used.includes(s.id)&&s.id!==previous);
- if(!pool.length)pool=BRUSH_STYLES.filter(s=>s.id!==previous);
+ const styles=allowed?BRUSH_STYLES.filter(s=>allowed.includes(s.id)):BRUSH_STYLES;
+ let pool=styles.filter(s=>!used.includes(s.id)&&s.id!==previous);
+ if(!pool.length)pool=styles.filter(s=>s.id!==previous);
+ if(!pool.length)pool=styles;
  const weight=s=>s.family===affinity?4:1;
  let draw=random()*pool.reduce((sum,s)=>sum+weight(s),0);
  return pool.find(s=>(draw-=weight(s))<0)||pool.at(-1);
