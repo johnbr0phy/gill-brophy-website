@@ -15,3 +15,18 @@ if(details){
 
 // Close the mobile panel if its trigger disappears at the desktop breakpoint.
 matchMedia('(min-width:701px)').addEventListener('change',event=>{if(event.matches&&menu.open)menu.close()});
+
+// On the homepage, leave the artwork clear until the visitor scrolls back up.
+if(document.body.classList.contains('paint-home')){
+ const header=document.querySelector('.portfolio-header');
+ let previous=Math.max(0,scrollY);
+ addEventListener('scroll',()=>{
+  const current=Math.max(0,Math.min(scrollY,document.documentElement.scrollHeight-innerHeight));
+  const delta=current-previous;
+  if(current<=8||menu.open){header.classList.remove('is-scrolled-away');previous=current;return}
+  if(Math.abs(delta)<6)return;
+  header.classList.toggle('is-scrolled-away',delta>0);
+  previous=current;
+ },{passive:true});
+ header.addEventListener('focusin',()=>header.classList.remove('is-scrolled-away'));
+}

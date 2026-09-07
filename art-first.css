@@ -74,3 +74,8 @@ html.paint-document,.paint-document .paint-home{background:#fff}
 .paint-home .paint-footer a,.paint-home .paint-gallery-link{color:#29433b}
 
 .paint-home .paint-footer{justify-content:center}
+
+/* Reveal the homepage navigation when scrolling back up. */
+.paint-home .portfolio-header{transition:transform .22s ease}
+.paint-home .portfolio-header.is-scrolled-away{transform:translateY(-100%)}
+@media(prefers-reduced-motion:reduce){.paint-home .portfolio-header{transition:none}}
