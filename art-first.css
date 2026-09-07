@@ -64,3 +64,5 @@ body.index-open{overflow:hidden}
 .scroll-invitation:hover svg{animation-play-state:paused}
 @media(max-width:600px){.scroll-invitation{bottom:max(22px,env(safe-area-inset-bottom))}}
 @media(prefers-reduced-motion:reduce){.scroll-invitation svg{animation:none}}
+/* Let a slight hint of the artwork show through the white masthead. */
+.portfolio-header,.gallery-page .portfolio-header,.about-page .portfolio-header{background:rgba(255,255,255,.94)}
