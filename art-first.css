@@ -84,3 +84,10 @@ html.paint-document,.paint-document .paint-home{background:#fff}
 .portfolio-header .portfolio-menu-button,.site-index .index-close{font:400 18px/1.4 Georgia,serif;letter-spacing:0}
 .site-index .index-close{display:flex;align-items:center;justify-content:center;gap:14px;color:#29433b;background:none;border:0}
 .site-index .index-close span{font:inherit;font-size:26px;line-height:1;width:25px;text-align:center}
+
+/* One underline for the whole gallery link, including on hover. */
+.paint-home .paint-gallery-link,.paint-home .paint-gallery-link:hover{display:inline-flex;align-items:center;gap:20px;min-height:48px;padding:10px 0;background:transparent;border:0;border-bottom:1px solid #29433b66;border-radius:0;color:#29433b;font:18px/1.4 Georgia,serif;text-decoration:none;text-shadow:none;box-shadow:none}
+.paint-home .paint-gallery-link span{font:inherit;text-decoration:none}
+.paint-home .paint-gallery-link svg{display:block;width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.paint-home .paint-gallery-link:hover{border-bottom-color:#29433b}
+.paint-home .paint-gallery-link:focus-visible{outline:2px solid #29433b;outline-offset:6px}
