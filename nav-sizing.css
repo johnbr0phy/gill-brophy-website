@@ -1,0 +1,9 @@
+/* Shared compact masthead dimensions for every public page and host. */
+.portfolio-header,.gallery-page .portfolio-header,.about-page .portfolio-header{height:79px;min-height:79px;padding:9px 4.3%;box-sizing:border-box}
+.portfolio-header .portfolio-wordmark{width:123px;height:60px;flex:0 0 123px}
+.portfolio-header .desktop-navigation{gap:34px}
+.portfolio-header .desktop-navigation a{font-size:15px;line-height:20px;padding:13px 0}
+@media(max-width:600px){
+ .portfolio-header,.gallery-page .portfolio-header,.about-page .portfolio-header{height:60px;min-height:60px;padding:8px 22px}
+ .portfolio-header .portfolio-wordmark{width:81px;height:40px;flex-basis:81px}
+}
