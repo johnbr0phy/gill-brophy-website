@@ -1,10 +1,11 @@
+import {fetchWorks} from './firebase-client/gallery-data.js';
 import {displayTitle,groupPaintings,collectionCovers,openingIds} from './curation.js';
 const $=id=>document.getElementById(id);
 let works=[],paintings=[],visible=[],current=null,opener=null;
 const params=new URLSearchParams(location.search);$('search').value=params.get('q')||'';
 if(['order','title','newest'].includes(params.get('sort')))$('sort').value=params.get('sort');
 async function load(){try{
- $('gallery-error').hidden=true;const r=await fetch('/gill-brophy-website/works.json');if(!r.ok)throw Error();({works}=await r.json());paintings=groupPaintings(works);
+ $('gallery-error').hidden=true;const r=await fetchWorks();if(!r.ok)throw Error();({works}=await r.json());paintings=groupPaintings(works);
  const names=[...new Set(paintings.map(w=>w.collection).filter(Boolean))].sort();
  $('collection').replaceChildren(new Option('All collections',''));names.forEach(n=>$('collection').add(new Option(n,n)));
  $('collection').value=params.get('collection')||'';buildCollections(names);render();fromHash();
@@ -24,7 +25,7 @@ function buildCollections(names){
 function render(){
  const q=$('search').value.trim().toLowerCase(),collection=$('collection').value;
  visible=paintings.filter(w=>(!collection||w.collection===collection)&&(!q||(w.title+' '+w.collection+' '+w.description).toLowerCase().includes(q)));
- if($('sort').value==='order')visible.sort((a,b)=>{const ai=openingIds.indexOf(a.id),bi=openingIds.indexOf(b.id);return (ai<0?999:ai)-(bi<0?999:bi)});
+ if($('sort').value==='order')visible.sort((a,b)=>a.position-b.position);
  if($('sort').value==='title')visible.sort((a,b)=>a.title.localeCompare(b.title));if($('sort').value==='newest')visible.sort((a,b)=>b.created-a.created);
  $('gallery').replaceChildren();$('empty').hidden=visible.length!==0;
  $('work-count').textContent=paintings.length+' works in '+new Set(paintings.map(w=>w.collection)).size+' collections';

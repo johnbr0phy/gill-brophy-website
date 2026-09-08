@@ -1,8 +1,9 @@
+import {fetchWorks} from './firebase-client/gallery-data.js';
 import {displayTitle,groupPaintings} from './curation.js';
 // Use the live published library, so hidden works never leak through the about page.
 const slots=['hero','closing'];
 try{
- const response=await fetch('/gill-brophy-website/works.json',{cache:'no-store'});if(!response.ok)throw Error('Gallery unavailable');
+ const response=await fetchWorks();if(!response.ok)throw Error('Gallery unavailable');
  const {works}=await response.json();
  const pool=groupPaintings(works.filter(w=>w.published!==false&&w.image));
  let previous=[];

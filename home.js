@@ -1,3 +1,4 @@
+import {fetchWorks} from './firebase-client/gallery-data.js';
 import {paintingProgress} from './scroll-progress.js';
 import {focalPointFor,coverPlacement} from './focal-points.js';
 import {buildStrokes} from './paint-strokes.js';
@@ -117,7 +118,7 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnim
 // Paints only in response to scrolling or resizing: no continuous animation, scroll capture or timers.
 async function start(){
  try{
-  const response=await fetch('/gill-brophy-website/works.json',{cache:'no-store'});if(!response.ok)throw Error('Gallery unavailable');
+  const response=await fetchWorks();if(!response.ok)throw Error('Gallery unavailable');
   const {works}=await response.json();let previous=[];
   try{const saved=JSON.parse(sessionStorage.getItem(STORAGE_KEY)||'[]');if(Array.isArray(saved))previous=saved}catch{}
   const selected=selectGalleryWorks(works,previous);
