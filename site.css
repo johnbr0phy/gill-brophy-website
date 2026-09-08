@@ -100,11 +100,13 @@
 .gallery-filter{display:flex;flex-direction:column;gap:6px;min-width:0}
 .filter-label{font-size:11px;color:#63756b}
 @media(max-width:700px){
- .gallery-page .gallery-tools{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;padding:20px 22px 32px}
- .gallery-tools .search-box{width:100%;max-width:none;min-width:0}
- .gallery-tools .search-box input,.gallery-tools select{width:100%;max-width:none;min-width:0;min-height:48px;font-size:16px;line-height:1.4}
- .gallery-tools select{appearance:none;-webkit-appearance:none;border:1px solid #cbd3cb;border-radius:4px;background-color:#fff;padding:12px 40px 12px 12px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%2329433b' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-position:right 14px center;background-repeat:no-repeat}
- .filter-label{font-size:12px}
+ .gallery-page .gallery-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:12px 22px 20px}
+ .gallery-tools .search-box{grid-column:1/-1;width:100%;max-width:none;min-width:0}
+ .gallery-tools .search-box input,.gallery-tools select{width:100%;max-width:none;min-width:0;min-height:44px;font-size:16px;line-height:1.4}
+ .gallery-tools .search-box input{padding-top:9px;padding-bottom:9px}
+ .gallery-tools .gallery-filter{gap:4px}
+ .gallery-tools select{appearance:none;-webkit-appearance:none;border:1px solid #cbd3cb;border-radius:4px;background-color:#fff;padding:9px 26px 9px 8px;text-overflow:ellipsis;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%2329433b' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-position:right 8px center;background-repeat:no-repeat}
+ .filter-label{font-size:11px}
  .results-heading{align-items:flex-start}.results-heading h2{min-width:0}.results-heading span{white-space:nowrap;padding-top:7px}
  .gallery-page .viewer-arrow{width:44px;height:48px}
  .gallery-page .viewer-art{padding-left:44px;padding-right:44px;min-height:160px}
